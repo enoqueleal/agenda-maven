@@ -43,9 +43,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 		</dependency>
 
 	</dependencies>
-	
+
 	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -58,11 +57,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.1</version>
-				<configuration>
-					<warSourceDirectory>src/main/webapp</warSourceDirectory>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
+	
 </project>
