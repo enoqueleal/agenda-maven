@@ -1,8 +1,7 @@
 package com.agenda.util;
 
+import java.sql.Connection;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Connection;
 
 public class TestaConexao {
 
@@ -10,8 +9,8 @@ public class TestaConexao {
 		
 		try {
 			Connection connection = new ConnectionFactory().getConnection();
-			connection.close();
 			System.out.println("Conexão aberta!");
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
