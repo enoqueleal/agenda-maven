@@ -1,8 +1,7 @@
 package com.agenda.util;
 
+import java.sql.Connection;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Connection;
 
 public class TestaConexao {
 

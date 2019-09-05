@@ -1,5 +1,6 @@
 package com.agenda.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +9,6 @@ import java.util.List;
 
 import com.agenda.model.Pessoa;
 import com.agenda.util.ConnectionFactory;
-import com.mysql.jdbc.Connection;
 
 public class PessoaDAO {
 

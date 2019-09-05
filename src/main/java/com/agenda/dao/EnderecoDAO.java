@@ -1,11 +1,11 @@
 package com.agenda.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.agenda.model.Endereco;
 import com.agenda.util.ConnectionFactory;
-import com.mysql.jdbc.Connection;
 
 public class EnderecoDAO {
 	
