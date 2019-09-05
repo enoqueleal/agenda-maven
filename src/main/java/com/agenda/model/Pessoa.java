@@ -1,12 +1,12 @@
 package com.agenda.model;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Pessoa {
 
 	private long id;
 	private String nome;
-	private Date dataNascimento;
+	private Calendar dataNascimento;
 	private Contato contato;
 	private Endereco endereco;
 
@@ -42,11 +42,11 @@ public class Pessoa {
 		this.id = id;
 	}
 
-	public Date getDataNascimento() {
+	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
