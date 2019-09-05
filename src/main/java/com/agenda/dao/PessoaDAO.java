@@ -1,10 +1,12 @@
 package com.agenda.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.agenda.model.Pessoa;
@@ -24,10 +26,10 @@ public class PessoaDAO {
 
 	public void cadastrar(Pessoa pessoa) {
 
-		this.enderecoDao.cadastrar(pessoa.getEndereco());
-		this.contatoDao.cadastrar(pessoa.getContato());
+		pessoa.setEndereco(this.enderecoDao.cadastrar(pessoa.getEndereco()));
+		pessoa.setContato(this.contatoDao.cadastrar(pessoa.getContato()));
 
-		String SQL = "insert into pessoas (nome) values (?)";
+		String SQL = "insert into pessoas (nome, data_nascimento, id_endereco, id_contato ) values (?, ?, ?, ?)";
 
 		try {
 
@@ -35,6 +37,9 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
+			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
+			stmt.setLong(3, pessoa.getEndereco().getId());
+			stmt.setLong(4, pessoa.getContato().getId());
 
 			stmt.execute();
 			stmt.close();
@@ -62,6 +67,9 @@ public class PessoaDAO {
 				Pessoa pessoa = new Pessoa();
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("data_nascimento"));
+				pessoa.setDataNascimento(data);
 				pessoas.add(pessoa);
 			}
 
