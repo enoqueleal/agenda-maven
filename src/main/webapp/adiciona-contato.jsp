@@ -28,43 +28,59 @@
 		<div class="text-center">
 			<h1 class="display-4">Formulário de cadastro</h1>
 	    </div>
-    
-		<div class="card">
-			<div class="card-body">
-				<form action="cadastra-usuario" id="form-produto">
-				
-					<input type="hidden" id="id" name="id" value="${param.id}">
-				
+		
+		<form action="cadastra-usuario" id="form-produto">
+		
+			<input type="hidden" id="id" name="id" value="${param.id}">
+			
+			<div class="card">
+				<div class="card-body">
 					<div class="form-row">
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-6">
 							<label for="nome">Nome</label> 
 							<input type="text" value="${param.nome}" class="form-control" id="name" name="nome" placeholder="Nome" >
 						</div>
-					</div>
-
-					<div class="form-row">
-						<div class="form-group col-md-3">
-							<label for="tel">Telefone</label> 
-							<input type="text" value="${param.telefone}" class="form-control" id="tel" name="telefone" placeholder="Telefone" data-mask="(99)9999-9999">
-						</div>
-
-						<div class="form-group col-md-3">
-							<label for="email">E-mail</label> 
-							<input type="email" value="${param.email}" class="form-control" id="email" name="email" placeholder="E-mail">
-						</div>
-
 						<div class="form-group col-md-6">
-							<label for="end">Endereço</label> 
-							<input type="text" value="${param.endereco}" class="form-control" id="end" name="endereco" placeholder="Endereço">
-						</div>
-
-						<div class="form-group col-md-6">
-							<button class="btn btn-success" id="btnSalvar" type="submit">Salvar</button>
+							<label for="nome">Nascimento</label> 
+							<input type="date" value="${param.dataNascimento}" class="form-control" id="dataNascimento" name="dataNascimento" placeholder="Nascimento" >
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+			<br>
+			<div class="card">
+				<div class="card-body">
+					<div class="form-group col-md-3">
+						<label for="tel">Telefone</label> 
+						<input type="text" value="${param.telefone}" class="form-control" id="tel" name="telefone" placeholder="Telefone" data-mask="(99) 9999-9999">
+					</div>
+
+					<div class="form-group col-md-3">
+						<label for="email">E-mail</label> 
+						<input type="email" value="${param.email}" class="form-control" id="email" name="email" placeholder="E-mail">
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="card">
+				<div class="card-body">
+					<div class="form-group col-md-6">
+						<label for="end">Logradouro</label> 
+						<input type="text" value="${param.endereco}" class="form-control" id=""logradouro"" name="logradouro" placeholder="Logradouro">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="end">CEP</label> 
+						<input type="text" value="${param.cep}" class="form-control" id="cep" name="cep" placeholder="CEP" data-mask="99999-999">
+					</div>
+				</div>
+			</div>
+			<br>
+			
+			<div>
+				<button class="btn btn-success" id="btnSalvar" type="submit">Salvar</button>
+			</div>
+				
+		</form>
 	</div>
 
 	<script src="js/jquery.js" type="text/javascript"></script>

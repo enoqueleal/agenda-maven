@@ -20,6 +20,7 @@ public class CadastraUsuarioService {
 		} else {
 			this.dao.alterar(pessoa);
 		}
+		
 	}
 
 	public List<Pessoa> buscaPessoas() {

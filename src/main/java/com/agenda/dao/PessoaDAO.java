@@ -12,11 +12,22 @@ import com.mysql.jdbc.Connection;
 
 public class PessoaDAO {
 
+	private EnderecoDAO enderecoDao;
+	private ContatoDAO contatoDao;
+
+	public PessoaDAO() {
+		this.enderecoDao = new EnderecoDAO();
+		this.contatoDao = new ContatoDAO();
+	}
+
 	private Connection connection;
 
 	public void cadastrar(Pessoa pessoa) {
 
-		String SQL = "insert into pessoas (nome, email, endereco, telefone) values (?,?,?,?)";
+		this.enderecoDao.cadastrar(pessoa.getEndereco());
+		this.contatoDao.cadastrar(pessoa.getContato());
+
+		String SQL = "insert into pessoas (nome) values (?)";
 
 		try {
 
@@ -24,9 +35,6 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
-			stmt.setString(2, pessoa.getEmail());
-			stmt.setString(3, pessoa.getEndereco());
-			stmt.setString(4, pessoa.getTelefone());
 
 			stmt.execute();
 			stmt.close();
@@ -54,9 +62,6 @@ public class PessoaDAO {
 				Pessoa pessoa = new Pessoa();
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
-				pessoa.setEmail(rs.getString("email"));
-				pessoa.setEndereco(rs.getString("endereco"));
-				pessoa.setTelefone(rs.getString("telefone"));
 				pessoas.add(pessoa);
 			}
 
@@ -84,27 +89,24 @@ public class PessoaDAO {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public void alterar(Pessoa pessoa) {
-		
-	    String SQL = "update pessoas set nome=?, email=?, endereco=?, telefone=? where id=?";
-	    
-	    try {
-	    	
-	    	this.connection = new ConnectionFactory().getConnection();
-	        PreparedStatement stmt = this.connection.prepareStatement(SQL);
-	        
-	        stmt.setString(1, pessoa.getNome());
-	        stmt.setString(2, pessoa.getEmail());
-	        stmt.setString(3, pessoa.getEndereco());
-	        stmt.setString(4, pessoa.getTelefone());
-	        stmt.setLong(5, pessoa.getId());
-	        stmt.execute();
-	        stmt.close();
-	        
-	    } catch (SQLException e) {
-	        throw new RuntimeException(e);
-	    }
+
+		String SQL = "update pessoas set nome=?, email=?, endereco=?, telefone=? where id=?";
+
+		try {
+
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = this.connection.prepareStatement(SQL);
+
+			stmt.setString(1, pessoa.getNome());
+			stmt.setLong(5, pessoa.getId());
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
