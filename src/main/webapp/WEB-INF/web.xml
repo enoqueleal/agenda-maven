@@ -10,14 +10,4 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	
-	<servlet>
-		<servlet-name>cadastra-usuario-servlet</servlet-name>
-		<servlet-class>com.agenda.servlet.CadastraUsuarioServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>cadastra-usuario-servlet</servlet-name>
-		<url-pattern>/cadastra-usuario</url-pattern>
-	</servlet-mapping>
-	
 </web-app>
