@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -39,22 +40,18 @@
 			<table class="table">
 					<tr>
 						<th>Nome</th>
-						<th>E-mail</th>
-						<th>Endereco</th>
-						<th>Telefone</th>
+						<th>Data de Nascimento</th>
 						<th></th>
 					</tr>
 					
 					<c:forEach var="pessoa" items="${contatos}">
 						<tr>
 							<td>${pessoa.nome}</td>
-							<td>${pessoa.email}</td>
-							<td>${pessoa.endereco}</td>
-							<td>${pessoa.telefone}</td>
+							<td><fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="dd-MM-yyyy"/></td>
 							<td>
 								<a href="#" onclick="saveContactId(${pessoa.id})" data-toggle="modal" data-target="#modalExemplo">Remover</a>
 								<span> | </span>
-								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&email=${pessoa.email}&endereco=${pessoa.endereco}&telefone=${pessoa.telefone}">Editar</a>
+								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&dataNascimento=<fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="yyy-MM-dd"/>">Editar</a>
 							</td>
 						</tr>
 					</c:forEach>
