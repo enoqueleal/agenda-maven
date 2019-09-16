@@ -41,6 +41,52 @@ public class EnderecoDAO {
 		return endereco;
 
 	}
+	
+	public Endereco buscarPorId(long id) {
+
+		String SQL = "select * from enderecos where id = ?";
+
+		try {
+
+			Endereco endereco = new Endereco();
+
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = this.connection.prepareStatement(SQL);
+
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				endereco.setId(id);
+				endereco.setLogradouro(rs.getString("logradouro"));
+				endereco.setCep(rs.getString("cep"));
+			}
+
+			stmt.close();
+			this.connection.close();
+			
+			return endereco;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+	
+	public void remover(long id) {
+
+		String SQL = "delete from enderecos where id=?";
+
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = connection.prepareStatement(SQL);
+			stmt.setLong(1, id);
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 
 }

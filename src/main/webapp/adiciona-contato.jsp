@@ -32,6 +32,7 @@
 		<form action="cadastra-usuario" id="form-produto">
 		
 			<input type="hidden" id="id" name="id" value="${param.id}">
+			<input type="hidden" id="id_endereco" name="id_endereco" value="${param.id_endereco}">
 			
 			<div class="card">
 				<div class="card-body">
@@ -66,7 +67,7 @@
 				<div class="card-body">
 					<div class="form-group col-md-6">
 						<label for="end">Logradouro</label> 
-						<input type="text" value="${param.endereco}" class="form-control" id=""logradouro"" name="logradouro" placeholder="Logradouro">
+						<input type="text" value="${param.logradouro}" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro">
 					</div>
 					<div class="form-group col-md-6">
 						<label for="end">CEP</label> 

@@ -70,6 +70,7 @@ public class PessoaDAO {
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
 				pessoa.setDataNascimento(data);
+				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
 				pessoas.add(pessoa);
 			}
 
