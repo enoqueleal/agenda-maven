@@ -13,13 +13,15 @@ public class CadastraUsuarioService {
 		this.dao = new PessoaDAO();
 	}
 
-	public void salvarOuAtualizar(Pessoa pessoa) {
+	public String salvarOuAtualizar(Pessoa pessoa) {
 
 		if (pessoa.getId() == 0) {
 			this.dao.cadastrar(pessoa);
 		} else {
 			this.dao.alterar(pessoa);
 		}
+		
+		return "1";
 		
 	}
 
