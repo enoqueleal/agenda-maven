@@ -49,9 +49,15 @@ public class CadastraUsuarioServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 
+		if (null != request.getParameter("id_endereco") && !"".equals(request.getParameter("id_endereco"))) {
+			endereco.setId(Long.parseLong(request.getParameter("id_endereco")));
+		}
 		endereco.setLogradouro(request.getParameter("logradouro"));
 		endereco.setCep(request.getParameter("cep"));
 
+		if (null != request.getParameter("id_contato") && !"".equals(request.getParameter("id_contato"))) {
+			contato.setId(Long.parseLong(request.getParameter("id_contato")));
+		}
 		contato.setEmail(request.getParameter("email"));
 		contato.setTelefone(request.getParameter("telefone"));
 

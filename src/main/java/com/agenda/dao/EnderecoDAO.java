@@ -87,6 +87,27 @@ public class EnderecoDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public void alterar(Endereco endereco) {
+
+		String SQL = "update enderecos set logradouro=?, cep=? where id=?";
+		try {
+
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = this.connection.prepareStatement(SQL);
+
+			stmt.setString(1, endereco.getLogradouro());
+			stmt.setString(2, endereco.getCep());
+			stmt.setLong(3, endereco.getId());
+			
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+	}
 
 
 }
