@@ -71,6 +71,7 @@ public class PessoaDAO {
 				data.setTime(rs.getDate("data_nascimento"));
 				pessoa.setDataNascimento(data);
 				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
+				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
 				pessoas.add(pessoa);
 			}
 
@@ -101,21 +102,29 @@ public class PessoaDAO {
 
 	public void alterar(Pessoa pessoa) {
 
-		String SQL = "update pessoas set nome=?, email=?, endereco=?, telefone=? where id=?";
-
+		String SQL = "update pessoas set nome=?, data_nascimento=?, id_endereco=?, id_contato=?  where id=?";
+		
+		this.enderecoDao.alterar(pessoa.getEndereco());
+		this.contatoDao.alterar(pessoa.getContato());
+		
 		try {
 
 			this.connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
+			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
+			stmt.setLong(3, pessoa.getEndereco().getId());
+			stmt.setLong(4, pessoa.getContato().getId());
 			stmt.setLong(5, pessoa.getId());
+			
 			stmt.execute();
 			stmt.close();
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+		
 	}
 
 }

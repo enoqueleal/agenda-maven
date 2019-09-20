@@ -33,6 +33,7 @@
 		
 			<input type="hidden" id="id" name="id" value="${param.id}">
 			<input type="hidden" id="id_endereco" name="id_endereco" value="${param.id_endereco}">
+			<input type="hidden" id="id_contato" name="id_contato" value="${param.id_contato}">
 			
 			<div class="card">
 				<div class="card-body">
