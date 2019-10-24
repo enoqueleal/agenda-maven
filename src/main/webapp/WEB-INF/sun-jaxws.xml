@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
 <endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
-	<endpoint name="HelloWorldEndpoint" implementation="com.agenda.endpoint.soap.HelloWorldEndpointImpl" url-pattern="/hello" />
+	<endpoint name="HelloWorldEndpoint" implementation="com.agenda.endpoint.soap.HelloWorldEndpoint" url-pattern="/hello" />
 </endpoints> 
