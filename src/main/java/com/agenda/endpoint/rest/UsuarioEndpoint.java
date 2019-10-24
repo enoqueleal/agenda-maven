@@ -1,4 +1,4 @@
-package com.agenda.endpoint;
+package com.agenda.endpoint.rest;
 
 import java.net.URI;
 

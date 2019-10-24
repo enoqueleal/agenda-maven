@@ -10,6 +10,8 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
+	<!--  Start JAX-RS Implementation -->
+	
 	<servlet>
 		<servlet-name>Jersey REST Service</servlet-name>
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -24,5 +26,30 @@
 		<servlet-name>Jersey REST Service</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+	
+	<!--  End JAX-RS Implementation -->
+	
+	<!-- Start JAX-WS Implementation -->
+	
+	<listener>
+		<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>hello</servlet-name>
+		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>hello</servlet-name>
+		<url-pattern>/hello</url-pattern>
+	</servlet-mapping>
+	
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+	
+	<!-- End JAX-WS Implementation -->
 
 </web-app>
