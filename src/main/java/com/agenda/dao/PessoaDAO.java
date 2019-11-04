@@ -127,4 +127,40 @@ public class PessoaDAO {
 		
 	}
 
+	public List<Pessoa> buscaPessoaPorNome(String nome) {
+		
+		String SQL = "select * from pessoas where nome like ?";
+
+		try {
+
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = this.connection.prepareStatement(SQL);
+
+			List<Pessoa> pessoas = new ArrayList<Pessoa>();
+			
+			stmt.setString(1, "%" + nome + "%");
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Pessoa pessoa = new Pessoa();
+				pessoa.setId(rs.getLong("id"));
+				pessoa.setNome(rs.getString("nome"));
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("data_nascimento"));
+				pessoa.setDataNascimento(data);
+				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
+				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
+				pessoas.add(pessoa);
+			}
+
+			stmt.close();
+			this.connection.close();
+			return pessoas;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

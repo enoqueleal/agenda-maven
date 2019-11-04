@@ -11,6 +11,7 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -36,27 +37,35 @@
 			</div>
 		</c:if>
 		
-		<c:if test="${not empty contatos}">
-			<table class="table">
-					<tr>
-						<th>Nome</th>
-						<th>Data de Nascimento</th>
-						<th></th>
-					</tr>
-					
-					<c:forEach var="pessoa" items="${contatos}">
+		<form>
+			<input type="text" id="nome-search" placeholder="Search for names..">
+		</form>
+		
+		<div id="ajax-response">
+		
+			<c:if test="${not empty contatos}">
+				<table class="table">
 						<tr>
-							<td>${pessoa.nome}</td>
-							<td><fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="dd-MM-yyyy"/></td>
-							<td>
-								<a href="#" onclick="saveContactId(${pessoa.id})" data-toggle="modal" data-target="#modalExemplo">Remover</a>
-								<span> | </span>
-								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&id_contato=${pessoa.contato.id}&email=${pessoa.contato.email}&telefone=${pessoa.contato.telefone}&id_endereco=${pessoa.endereco.id}&cep=${pessoa.endereco.cep}&logradouro=${pessoa.endereco.logradouro}&dataNascimento=<fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="yyy-MM-dd"/>">Editar</a>
-							</td>
+							<th>Nome</th>
+							<th>Data de Nascimento</th>
+							<th></th>
 						</tr>
-					</c:forEach>
-			</table>
-		</c:if>
+						
+						<c:forEach var="pessoa" items="${contatos}">
+							<tr>
+								<td>${pessoa.nome}</td>
+								<td><fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="dd-MM-yyyy"/></td>
+								<td>
+									<a href="#" onclick="saveContactId(${pessoa.id})" data-toggle="modal" data-target="#modalExemplo">Remover</a>
+									<span> | </span>
+									<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&id_contato=${pessoa.contato.id}&email=${pessoa.contato.email}&telefone=${pessoa.contato.telefone}&id_endereco=${pessoa.endereco.id}&cep=${pessoa.endereco.cep}&logradouro=${pessoa.endereco.logradouro}&dataNascimento=<fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="yyy-MM-dd"/>">Editar</a>
+								</td>
+							</tr>
+						</c:forEach>
+				</table>
+			</c:if>
+			
+		</div>
 		
 	</div>
 	
@@ -80,8 +89,10 @@
 		</div>
 	</div>
 		
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
+	
 	<script>
 	
 		var contact;
@@ -93,6 +104,21 @@
 		function removeContact(){
 			window.location.href = "remove-usuario?id="+contact;
 		}
+		
+		$(document).ready(function() {
+			$('#nome-search').blur(function() {
+				
+				$.ajax({
+					url : 'busca-usuario',
+					data : {
+						nomeSearch : $('#nome-search').val()
+					},
+					success : function(responseText) {
+						$('#ajax-response').html(responseText);
+					}
+				});
+			});
+		});
 		
 	</script>
 

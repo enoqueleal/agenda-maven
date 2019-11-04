@@ -33,4 +33,8 @@ public class CadastraUsuarioService {
 		this.dao.remover(pessoa);
 	}
 
+	public List<Pessoa> buscaPessoaPorNome(String nome) {
+		return this.dao.buscaPessoaPorNome(nome);
+	}
+
 }
