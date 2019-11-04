@@ -11,6 +11,7 @@
         <title><s:title default="Agenda"/></title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 		<link rel="shortcut icon" href="img/favicon.ico" />
         <s:head />
     </head>

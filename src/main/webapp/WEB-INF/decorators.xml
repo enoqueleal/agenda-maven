@@ -2,7 +2,13 @@
 <!DOCTYPE xml>
 
 <decorators>
-    <decorator name="main" page="/WEB-INF/decorators/template.jsp">
-        <pattern>*</pattern>
-    </decorator>
+
+	<excludes>
+		<pattern>/busca-usuario*</pattern>
+	</excludes>
+	
+	<decorator name="main" page="/WEB-INF/decorators/template.jsp">
+		<pattern>*</pattern>
+	</decorator>
+	
 </decorators> 
