@@ -28,6 +28,10 @@ public class CadastraUsuarioService {
 	public List<Pessoa> buscaPessoas() {
 		return this.dao.buscarPessoas();
 	}
+	
+	public Pessoa buscarPorId(String id) {
+		return this.dao.buscaPessoaPorId(id);
+	}
 
 	public void remover(Pessoa pessoa) {
 		this.dao.remover(pessoa);

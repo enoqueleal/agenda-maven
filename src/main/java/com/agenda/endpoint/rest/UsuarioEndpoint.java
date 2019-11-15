@@ -39,8 +39,8 @@ public class UsuarioEndpoint {
 	
 	@GET
 	@Path("{id}")
-	public Response buscarPorId(@PathParam("id") long id) {
-		return Response.ok(this.service.buscaPessoas()).build();
+	public Response buscarPorId(@PathParam("id") String id) {
+		return Response.ok(this.service.buscarPorId(id)).build();
 	}
 	
 	@POST

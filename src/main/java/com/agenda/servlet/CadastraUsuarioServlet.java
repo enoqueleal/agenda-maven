@@ -44,7 +44,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dataNascimento"));
 			Calendar dataNascimento = Calendar.getInstance();
 			dataNascimento.setTime(date);
-			pessoa.setDataNascimento(dataNascimento);
+//			pessoa.setDataNascimento(dataNascimento);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}

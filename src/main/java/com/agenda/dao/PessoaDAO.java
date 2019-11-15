@@ -1,7 +1,6 @@
 package com.agenda.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +36,7 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
-			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
+//			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
 			stmt.setLong(3, pessoa.getEndereco().getId());
 			stmt.setLong(4, pessoa.getContato().getId());
 
@@ -69,7 +68,7 @@ public class PessoaDAO {
 				pessoa.setNome(rs.getString("nome"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
-				pessoa.setDataNascimento(data);
+//				pessoa.setDataNascimento(data);
 				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
 				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
 				pessoas.add(pessoa);
@@ -113,7 +112,7 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
-			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
+//			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
 			stmt.setLong(3, pessoa.getEndereco().getId());
 			stmt.setLong(4, pessoa.getContato().getId());
 			stmt.setLong(5, pessoa.getId());
@@ -148,7 +147,7 @@ public class PessoaDAO {
 				pessoa.setNome(rs.getString("nome"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
-				pessoa.setDataNascimento(data);
+//				pessoa.setDataNascimento(data);
 				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
 				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
 				pessoas.add(pessoa);
@@ -161,6 +160,45 @@ public class PessoaDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public Pessoa buscaPessoaPorId(String id) {
+		
+		String SQL = "select * from pessoas where id = ?";
+
+		try {
+
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = this.connection.prepareStatement(SQL);
+
+			List<Pessoa> pessoas = new ArrayList<Pessoa>();
+			
+			stmt.setString(1, id);
+
+			ResultSet rs = stmt.executeQuery();
+
+			Pessoa pessoa = new Pessoa();
+			
+			while (rs.next()) {
+				pessoa.setId(rs.getLong("id"));
+				pessoa.setNome(rs.getString("nome"));
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate("data_nascimento"));
+//				pessoa.setDataNascimento(data);
+				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
+				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
+				pessoas.add(pessoa);
+			}
+
+			stmt.close();
+			this.connection.close();
+			
+			return pessoa;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
 	}
 
 }
