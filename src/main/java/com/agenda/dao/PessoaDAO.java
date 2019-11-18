@@ -179,9 +179,10 @@ public class PessoaDAO {
 
 			ResultSet rs = stmt.executeQuery();
 
-			Pessoa pessoa = new Pessoa();
+			Pessoa pessoa = null;
 			
 			while (rs.next()) {
+				pessoa = new Pessoa();
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
 				Calendar data = Calendar.getInstance();
