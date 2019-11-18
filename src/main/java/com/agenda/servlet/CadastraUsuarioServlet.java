@@ -2,10 +2,6 @@ package com.agenda.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,14 +36,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 
 		pessoa.setNome(request.getParameter("nome"));
 
-		try {
-			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dataNascimento"));
-			Calendar dataNascimento = Calendar.getInstance();
-			dataNascimento.setTime(date);
-//			pessoa.setDataNascimento(dataNascimento);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
+		pessoa.setDataNascimento(request.getParameter("dataNascimento"));
 
 		if (null != request.getParameter("id_endereco") && !"".equals(request.getParameter("id_endereco"))) {
 			endereco.setId(Long.parseLong(request.getParameter("id_endereco")));

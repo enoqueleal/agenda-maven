@@ -1,6 +1,7 @@
 package com.agenda.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +37,8 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
-//			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
+			java.util.Date dataNascimento = pessoa.getDataNascimento();
+			stmt.setDate(2, new Date(dataNascimento.getTime()));
 			stmt.setLong(3, pessoa.getEndereco().getId());
 			stmt.setLong(4, pessoa.getContato().getId());
 
@@ -68,7 +70,7 @@ public class PessoaDAO {
 				pessoa.setNome(rs.getString("nome"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
-//				pessoa.setDataNascimento(data);
+				pessoa.setDataNascimento(data);
 				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
 				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
 				pessoas.add(pessoa);
@@ -112,7 +114,7 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
-//			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTimeInMillis()));
+			stmt.setDate(2, new Date(pessoa.getDataNascimento().getTime()));
 			stmt.setLong(3, pessoa.getEndereco().getId());
 			stmt.setLong(4, pessoa.getContato().getId());
 			stmt.setLong(5, pessoa.getId());
@@ -147,7 +149,7 @@ public class PessoaDAO {
 				pessoa.setNome(rs.getString("nome"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
-//				pessoa.setDataNascimento(data);
+				pessoa.setDataNascimento(data);
 				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
 				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
 				pessoas.add(pessoa);
@@ -184,7 +186,7 @@ public class PessoaDAO {
 				pessoa.setNome(rs.getString("nome"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
-//				pessoa.setDataNascimento(data);
+				pessoa.setDataNascimento(data);
 				pessoa.setEndereco(this.enderecoDao.buscarPorId(rs.getLong("id_endereco")));
 				pessoa.setContato(this.contatoDao.buscarPorId(rs.getLong("id_contato")));
 				pessoas.add(pessoa);

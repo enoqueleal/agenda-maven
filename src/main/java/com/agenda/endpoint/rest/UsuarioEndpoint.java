@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import com.agenda.model.Pessoa;
@@ -40,7 +41,15 @@ public class UsuarioEndpoint {
 	@GET
 	@Path("{id}")
 	public Response buscarPorId(@PathParam("id") String id) {
-		return Response.ok(this.service.buscarPorId(id)).build();
+		
+		Pessoa pessoa = this.service.buscarPorId(id);
+		
+		if(null != pessoa) {
+			return Response.ok(pessoa).build();
+		}
+		
+		return Response.status(Status.NOT_FOUND).build();
+		
 	}
 	
 	@POST
@@ -56,7 +65,6 @@ public class UsuarioEndpoint {
 	@DELETE
 	@Path("{id}")
 	public Response deletar(@PathParam("id") long id) {
-		System.out.println(id);
 		return Response.ok().build();
 	}
 	
@@ -64,5 +72,6 @@ public class UsuarioEndpoint {
 		String id = this.service.salvarOuAtualizar(pessoa);
 		return uri.getAbsolutePathBuilder().path(id).build();
 	}
+	
 
 }

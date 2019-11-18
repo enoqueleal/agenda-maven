@@ -36,11 +36,11 @@
 					<c:forEach var="pessoa" items="${contatos}">
 						<tr>
 							<td>${pessoa.nome}</td>
-							<td><fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="dd-MM-yyyy"/></td>
+							<td><fmt:formatDate value="${pessoa.dataNascimento}" pattern="dd-MM-yyyy"/></td>
 							<td>
 								<a href="#" onclick="saveContactId(${pessoa.id})" data-toggle="modal" data-target="#modalExemplo">Remover</a>
 								<span> | </span>
-								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&id_contato=${pessoa.contato.id}&email=${pessoa.contato.email}&telefone=${pessoa.contato.telefone}&id_endereco=${pessoa.endereco.id}&cep=${pessoa.endereco.cep}&logradouro=${pessoa.endereco.logradouro}&dataNascimento=<fmt:formatDate value="${pessoa.dataNascimento.time}" pattern="yyy-MM-dd"/>">Editar</a>
+								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&id_contato=${pessoa.contato.id}&email=${pessoa.contato.email}&telefone=${pessoa.contato.telefone}&id_endereco=${pessoa.endereco.id}&cep=${pessoa.endereco.cep}&logradouro=${pessoa.endereco.logradouro}&dataNascimento=<fmt:formatDate value="${pessoa.dataNascimento}" pattern="yyy-MM-dd"/>">Editar</a>
 							</td>
 						</tr>
 					</c:forEach>
