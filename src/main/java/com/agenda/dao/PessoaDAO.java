@@ -29,7 +29,7 @@ public class PessoaDAO {
 		pessoa.setEndereco(this.enderecoDao.cadastrar(pessoa.getEndereco()));
 		pessoa.setContato(this.contatoDao.cadastrar(pessoa.getContato()));
 
-		String SQL = "insert into pessoas (nome, data_nascimento, id_endereco, id_contato ) values (?, ?, ?, ?)";
+		String SQL = "insert into pessoas (nome, foto, data_nascimento, id_endereco, id_contato ) values (?, ?, ?, ?, ?)";
 
 		try {
 
@@ -37,10 +37,11 @@ public class PessoaDAO {
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
 			stmt.setString(1, pessoa.getNome());
+			stmt.setString(2, pessoa.getFoto());
 			java.util.Date dataNascimento = pessoa.getDataNascimento();
-			stmt.setDate(2, new Date(dataNascimento.getTime()));
-			stmt.setLong(3, pessoa.getEndereco().getId());
-			stmt.setLong(4, pessoa.getContato().getId());
+			stmt.setDate(3, new Date(dataNascimento.getTime()));
+			stmt.setLong(4, pessoa.getEndereco().getId());
+			stmt.setLong(5, pessoa.getContato().getId());
 
 			stmt.execute();
 			stmt.close();
@@ -68,6 +69,7 @@ public class PessoaDAO {
 				Pessoa pessoa = new Pessoa();
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
+				pessoa.setFoto(rs.getString("foto"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
 				pessoa.setDataNascimento(data);
@@ -147,6 +149,7 @@ public class PessoaDAO {
 				Pessoa pessoa = new Pessoa();
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
+				pessoa.setFoto(rs.getString("foto"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
 				pessoa.setDataNascimento(data);
@@ -185,6 +188,7 @@ public class PessoaDAO {
 				pessoa = new Pessoa();
 				pessoa.setId(rs.getLong("id"));
 				pessoa.setNome(rs.getString("nome"));
+				pessoa.setFoto(rs.getString("foto"));
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("data_nascimento"));
 				pessoa.setDataNascimento(data);

@@ -4,14 +4,16 @@
 
 <!DOCTYPE html>
 <html>
-<head>	<title>Adiciona contato</title>
+<head>	
+	<title>Adiciona contato</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 	<div class="text-center">
 		<h1 class="display-4">Formulário de cadastro</h1>
     </div>
 	
-	<form action="cadastra-usuario" id="form-produto">
+	<form action="cadastra-usuario" id="form-produto" enctype="multipart/form-data" method="post">
 	
 		<input type="hidden" id="id" name="id" value="${param.id}">
 		<input type="hidden" id="id_endereco" name="id_endereco" value="${param.id_endereco}">
@@ -27,6 +29,15 @@
 					<div class="form-group col-md-6">
 						<label for="nome">Nascimento</label> 
 						<input type="date" value="${param.dataNascimento}" class="form-control" id="dataNascimento" name="dataNascimento" placeholder="Nascimento" >
+					</div>
+					<div class="form-group col-md-6 text-center">
+						<div class="form-group col-md-12 text-center">
+							<img id="blah" src="${(empty foto) ? 'img/default-avatar.jpg' : foto}" style="width: 100px; margin-bottom: 10px" class="img-fluid" alt="Image">
+						</div>
+						<div class="form-group col-md-12 text-center">
+							<input type="file" name="file" id="file" class="custom-file-input" onchange="readURL(this)" required>
+							<label class="custom-file-label" for="file">Choose file</label>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -63,5 +74,19 @@
 			<button class="btn btn-success" id="btnSalvar" type="submit">Salvar</button>
 		</div>
 	</form>
+	
+	<script type="text/javascript">
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	
+	            reader.onload = function (e) {
+	                $('#blah').attr('src', e.target.result);
+	            };
+	
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	</script>
 </body>
 </html>

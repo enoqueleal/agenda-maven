@@ -11,6 +11,7 @@ public class Pessoa {
 
 	private long id;
 	private String nome;
+	private String foto;
 	
 	@JsonAdapter(CalendarDeserializer.class)
 	private Calendar dataNascimento;
@@ -69,6 +70,14 @@ public class Pessoa {
 			e.printStackTrace();
 		}
 
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 }

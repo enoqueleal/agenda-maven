@@ -1,6 +1,7 @@
 CREATE TABLE pessoas (
 	id	INT NOT	NULL AUTO_INCREMENT,
 	nome			VARCHAR(255),
+	foto			VARCHAR(255),
 	data_nascimento	DATE,
 	id_endereco		INT,
 	id_contato		INT,
